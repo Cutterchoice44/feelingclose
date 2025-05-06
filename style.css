@@ -146,7 +146,7 @@ section h2 {
 
 .player-container {
   max-width: 1000px;
-  margin: 2rem auto;
+  margin: 0rem auto;
 }
 
 #now-archive {
@@ -463,7 +463,7 @@ section h2 {
 
 /* SLIDESHOW: enlarge DJ artwork by 20% and teal border */
 #now-art {
-  max-width: 420px !important; /* 350px * 1.2 */
+  max-width: 450px !important; /* 350px * 1.2 */
   border: 2px solid var(--brand-teal) !important;
   display: block !important;
   margin: 1rem auto !important;
@@ -499,7 +499,7 @@ section {
   .live-player iframe,
   .live-player audio {
     height: 600px !important;
-    max-height: 110vh; /* optional: let it grow with the viewport */
+    max-height: 150vh; /* optional: let it grow with the viewport */
   }
 }
 /* DESKTOP: truly blow out the slideshow */
@@ -511,7 +511,7 @@ section {
     max-width: none   !important;
     transform: none   !important;
     height: 400px     !important;
-    max-height: 90vh  !important;
+    max-height: 80vh  !important;
   }
   /* <— change this: */
   #slideshow > * {
@@ -529,5 +529,46 @@ section {
 .live-player .player-container {
   margin-top: 0.5rem !important;
 }
+/* ———————————————— Teal Line Animation ———————————————— */
+/* 1. Place this block at the very bottom of your style.css */
+
+/* initial state: zero width */
+.teal-line {
+  width: 0;
+  height: 4px; /* thickness of the line */
+  background: var(--brand-teal);
+  margin: 0 auto;      /* center under header */
+  animation: drawLine 2s ease-out forwards;
+  /* optional delay if you want to wait for header fonts to load */
+  /* animation-delay: 0.3s; */
+}
+
+@keyframes drawLine {
+  to {
+    width: 100%;       /* full width of the container */
+  }
+}/* —————— Reverse Teal Line under Section Titles —————— */
+section h2 {
+  position: relative;  /* enable absolute positioning on ::after */
+  padding-bottom: 0.6rem;   /* make room for the line */
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;          /* right under the text */
+  right: 0;           /* start at the far right */
+  width: 0;           /* initial width */
+  height: 4px;        /* thickness of the line */
+  background: var(--brand-teal);
+  animation: drawLineReverse 2s ease-out forwards;
+}
+
+@keyframes drawLineReverse {
+  to {
+    width: 100%;      /* grow to full width from the right */
+  }
+}
+
 
 
