@@ -498,7 +498,7 @@ section {
 @media (min-width: 769px) {
   .live-player iframe,
   .live-player audio {
-    height: 600px !important;
+    height: 750px !important;
     max-height: 150vh; /* optional: let it grow with the viewport */
   }
 }
@@ -510,8 +510,8 @@ section {
     width: 100%       !important;
     max-width: none   !important;
     transform: none   !important;
-    height: 400px     !important;
-    max-height: 80vh  !important;
+    height: 550px     !important;
+    max-height: 100vh  !important;
   }
   /* <— change this: */
   #slideshow > * {
@@ -568,7 +568,12 @@ section h2::after {
   to {
     width: 100%;      /* grow to full width from the right */
   }
+/* —————— Restore Teal Border on Slideshow —————— */
+#slideshow {
+  border: 2px solid var(--brand-teal) !important;
+  box-sizing: border-box;  /* ensure the border is included in the element’s size */
 }
+
 
 
 
