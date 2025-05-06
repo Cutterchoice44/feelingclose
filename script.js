@@ -189,8 +189,33 @@ async function fetchNowPlayingArchive() {
 // ─────────────────────────────────────────────────────────────────────────────
 function addMixcloud()    { /* … */ }
 function deleteMixcloud() { /* … */ }
-function openChatPopup()  { /* … */ }
-function closeChatModal() { /* … */ }
+
+function openChatPopup() {
+  const isMobile = /Mobi|Android/i.test(navigator.userAgent);
+  const chatUrl = "https://app.radiocult.fm/embed/chat/cutters-choice-radio?theme=midnight&primaryColor=%235A8785&corners=sharp";
+
+  if (isMobile) {
+    const chatModal = document.getElementById("chatModal");
+    const iframe = document.getElementById("chatModalIframe");
+    if (chatModal && iframe) {
+      iframe.src = chatUrl;
+      chatModal.style.display = "flex";
+    }
+  } else {
+    window.open(chatUrl, "CuttersChatPopup", "width=400,height=700,resizable=yes,scrollbars=yes");
+  }
+}
+
+function closeChatModal() {
+  const chatModal = document.getElementById("chatModal");
+  const iframe = document.getElementById("chatModalIframe");
+  if (chatModal && iframe) {
+    chatModal.style.display = "none";
+    iframe.src = "";
+  }
+}
+
+
 
 // ─────────────────────────────────────────────────────────────────────────────
 // 5) INITIALIZE ON DOM READY
