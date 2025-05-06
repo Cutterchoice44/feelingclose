@@ -155,7 +155,37 @@ async function fetchNowPlayingArchive() {
     console.error("Error fetching archive show:", err);
     document.getElementById("now-archive").textContent = "Unable to load archive show";
   }
+}// —————————————————————————————————————
+//  Add archive “Now Playing” via Radio Cult API
+// —————————————————————————————————————
+async function updateArchiveNowPlaying() {
+  try {
+    // Fetch both live-and-archive metadata from the same endpoint
+    const { result } = await rcFetch(`/station/${STATION_ID}/schedule/live`);
+    const md = result.metadata || {};
+    const ct = result.content  || {};
+    const el = document.getElementById("now-archive");
+
+    // Prefer artist/title (live), fall back to content.title (archive playlist name)
+    if (md.artist && md.title) {
+      el.textContent = `Now Playing: ${md.artist} – ${md.title}`;
+    } else if (ct.title) {
+      el.textContent = `Now Playing: ${ct.title}`;
+    } else {
+      el.textContent = "Now Playing: Unknown";
+    }
+  } catch (err) {
+    console.error("Error fetching now‐playing archive:", err);
+    document.getElementById("now-archive").textContent =
+      "Now Playing: Unable to load";
+  }
 }
+
+// Kick it off on page load, then refresh every 30 s:
+document.addEventListener("DOMContentLoaded", () => {
+  updateArchiveNowPlaying();
+  setInterval(updateArchiveNowPlaying, 30000);
+});
 
 // —————————————————————————————————————
 // 4) ADMIN & UI ACTIONS
