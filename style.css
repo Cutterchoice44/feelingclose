@@ -573,6 +573,23 @@ section h2::after {
   border: 2px solid var(--brand-teal) !important;
   box-sizing: border-box;  /* ensure the border is included in the element’s size */
 }
+/* ─── Compact Archive Player ─────────────────────────────────────────────── */
+
+/* 1) Shrink the outer wrapper so it never grows wider than 600px */
+.live-player .player-container {
+  max-width: 600px !important;   /* was 1000px */
+}
+
+/* 2) Cut down the padding around the iframe */
+.live-player {
+  padding: 0.15rem !important;   /* was 0.5rem */
+}
+
+/* 3) Remove the bottom margin on the player itself */
+.live-player iframe,
+.live-player audio {
+  margin: 0 auto !important;     /* was 0 auto 1rem */
+}
 
 
 
